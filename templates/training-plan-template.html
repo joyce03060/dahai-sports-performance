@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{计划标题}}</title>
+<style>
+/* ============================================================
+   大海运动表现 · 训练计划 HTML 模板 v5 —— 液态金属玻璃版
+   设计方向：银色丝绸反光 · 磨砂玻璃卡片 · 暖橙光晕
+   使用说明：本模板样式与结构固定，生成计划时只替换内容，
+   不要修改任何 CSS 与区块结构。各区块填充规则见 HTML 注释。
+   ============================================================ */
+:root{
+  /* 银灰金属灰阶 */
+  --steel-900:#2a2e35; --steel-700:#4a5159; --steel-500:#7a8189;
+  --steel-300:#b8bdc4; --steel-200:#d8dce1; --steel-100:#e9ecf0;
+  /* 暖白底 */
+  --bg:#f1eee9; --bg-deep:#e8e4dd;
+  /* 暖橙光晕 */
+  --warm:#f5a05f; --warm-deep:#e87a3d; --warm-glow:rgba(245,160,95,.35);
+  /* 文字 */
+  --ink:#1d2026; --ink-soft:#3c424a; --muted:#7a8089; --line:rgba(60,66,74,.10);
+  /* 语义色（玻璃版，用于证据徽章） */
+  --pub:#2f7d5c; --pub-bg:rgba(47,125,92,.10);
+  --infer:#c08341; --infer-bg:rgba(192,131,65,.10);
+  --sci:#c2554a; --sci-bg:rgba(194,85,74,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ===== 背景：暖白底 + 银色金属丝绸反光带 + 暖橙光晕 ===== */
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.75;
+  padding:36px 16px 80px;
+  background:var(--bg);
+  /* 多层 background：暖白底 + 两条大银色弧形反光带 + 底部暖橙光晕 */
+  background-image:
+    /* 左上银色丝绸反光 */
+    radial-gradient(ellipse 80% 60% at 8% 12%, rgba(255,255,255,.85) 0%, rgba(255,255,255,.4) 22%, transparent 50%),
+    /* 右上银色反光 */
+    radial-gradient(ellipse 70% 50% at 92% 8%, rgba(220,225,232,.7) 0%, rgba(220,225,232,.3) 25%, transparent 55%),
+    /* 右下银色丝绸褶皱 */
+    radial-gradient(ellipse 90% 70% at 95% 95%, rgba(180,190,200,.55) 0%, rgba(180,190,200,.2) 30%, transparent 60%),
+    /* 左下暖橙光晕 */
+    radial-gradient(circle 50% at 5% 95%, var(--warm-glow) 0%, transparent 55%),
+    /* 底中央暖橙光带 */
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245,160,95,.22) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  background-attachment:fixed;
+  background-size:cover;
+}
+.wrap{max-width:880px;margin:0 auto;position:relative;z-index:1}
+
+/* ===== 页头：白色磨砂玻璃卡 + 品牌符号 ⚡ ===== */
+.page-header{
+  position:relative;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:20px;
+  padding:36px 38px;
+  margin-bottom:22px;
+  box-shadow:
+    0 24px 60px rgba(60,66,74,.10),
+    0 4px 12px rgba(60,66,74,.04),
+    inset 0 1px 0 rgba(255,255,255,.9);
+  overflow:hidden;
+}
+/* 顶部一道银色金属光泽 */
+.page-header::before{
+  content:"";position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95) 30%,rgba(255,255,255,.95) 70%,transparent);
+}
+/* 底部右上一抹暖橙微光 */
+.page-header::after{
+  content:"";position:absolute;top:-30%;right:-10%;width:60%;height:160%;
+  background:radial-gradient(circle, rgba(245,160,95,.18) 0%, transparent 65%);
+  pointer-events:none;
+}
+.page-header .brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;position:relative;z-index:1}
+.page-header .brand .bolt{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg,var(--steel-900),var(--steel-700));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:16px;font-weight:900;
+  box-shadow:0 4px 10px rgba(42,46,53,.25),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.page-header .brand .name{font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--steel-900)}
+.page-header .kicker{font-size:11px;letter-spacing:2.5px;color:var(--muted);margin-bottom:12px;text-transform:uppercase;position:relative;z-index:1}
+.page-header h1{font-size:30px;font-weight:800;letter-spacing:-.5px;color:var(--ink);margin-bottom:12px;line-height:1.25;position:relative;z-index:1}
+.page-header .subtitle{font-size:15px;color:var(--ink-soft);font-weight:400;position:relative;z-index:1;max-width:600px}
+.page-header .meta{font-size:12px;color:var(--muted);margin-top:14px;position:relative;z-index:1}
+.page-header .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;position:relative;z-index:1}
+.page-header .tags span{
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(60,66,74,.08);
+  border-radius:999px;
+  padding:5px 13px;
+  font-size:12px;
+  color:var(--ink-soft);
+  font-weight:500;
+  backdrop-filter:blur(8px);
+}
+
+/* ===== 导航按钮（吸顶磨砂玻璃） ===== */
+.anchor-nav{
+  display:flex;flex-wrap:wrap;gap:8px;
+  position:sticky;top:0;z-index:100;
+  background:rgba(241,238,233,.75);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  padding:14px 0;
+  margin:0 0 22px;
+  border-bottom:1px solid rgba(60,66,74,.06);
+}
+.anchor-nav a{
+  font-size:12px;color:var(--ink-soft);text-decoration:none;
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(60,66,74,.08);
+  padding:7px 14px;border-radius:999px;
+  transition:.2s;font-weight:500;
+  box-shadow:0 1px 3px rgba(60,66,74,.04);
+}
+.anchor-nav a:hover{
+  background:#fff;border-color:rgba(42,46,53,.25);color:var(--ink);
+  box-shadow:0 3px 8px rgba(60,66,74,.10);
+}
+
+/* ===== 结论框（磨砂玻璃 + 橙色发光光柱） ===== */
+.verdict{
+  position:relative;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:0 16px 16px 0;
+  padding:18px 22px;
+  margin-bottom:26px;
+  font-size:14px;
+  box-shadow:0 8px 24px rgba(60,66,74,.06),inset 0 1px 0 rgba(255,255,255,.9);
+  overflow:hidden;
+}
+/* 橙色光柱：内部纵向渐变（顶深橙→底浅橙），贴合卡片圆角，无白核、无外溢辉光 */
+.verdict::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:10px;border-radius:0 16px 16px 0;
+  background:
+    linear-gradient(180deg,
+      var(--warm-deep) 0%,
+      var(--warm) 45%,
+      rgba(245,160,95,.6) 75%,
+      rgba(245,160,95,.18) 100%);
+}
+.verdict strong{color:var(--ink);font-weight:700}
+.verdict .verdict-brief{font-size:13px;color:var(--muted);margin-left:10px}
+
+/* ===== 章节标题 ===== */
+h2.section{
+  font-size:18px;font-weight:800;
+  margin:38px 0 16px;
+  display:flex;align-items:center;gap:12px;
+  color:var(--ink);
+  letter-spacing:.3px;
+}
+h2.section::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,var(--steel-300),transparent);
+}
+
+/* ===== 训练日区块（磨砂玻璃卡 + 类型化玻璃色块） ===== */
+.day-block{
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:18px;
+  margin-bottom:18px;
+  overflow:hidden;
+  box-shadow:0 12px 32px rgba(60,66,74,.07),inset 0 1px 0 rgba(255,255,255,.9);
+  transition:.25s;
+}
+.day-block:hover{transform:translateY(-2px);box-shadow:0 20px 44px rgba(60,66,74,.10),inset 0 1px 0 rgba(255,255,255,.9)}
+.day-header{
+  padding:14px 22px;
+  font-size:15px;font-weight:700;
+  color:#fff;
+  letter-spacing:.5px;
+  position:relative;
+  overflow:hidden;
+}
+.day-header::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+}
+/* 力量日：深石墨 + 微暖橙光 */
+.day-mon{background:linear-gradient(135deg,var(--steel-900) 0%,#4a5159 60%,#6a6055 100%)}
+.day-thu{background:linear-gradient(135deg,var(--steel-900) 0%,#4a5159 60%,#6a6055 100%)}
+/* 速度日：中灰金属 + 暖橙边 */
+.day-tue{background:linear-gradient(135deg,#4a5159 0%,#7a8189 50%,#a07555 100%)}
+.day-fri{background:linear-gradient(135deg,#4a5159 0%,#7a8189 50%,#a07555 100%)}
+/* 恢复日：暖灰金属 */
+.day-wed{background:linear-gradient(135deg,#7a8189 0%,#9aa1ab 50%,#b8bdc4 100%);color:#fff}
+.day-sat{background:linear-gradient(135deg,#7a8189 0%,#9aa1ab 50%,#b8bdc4 100%);color:#fff}
+/* 休息日：极浅暖银 */
+.day-sun{background:linear-gradient(135deg,#c8b8a8 0%,#d4c8b8 50%,#e0d8c8 100%);color:var(--ink-soft)}
+.day-body{padding:18px 24px}
+.day-body .phase-note{font-size:13px;color:var(--muted);margin-bottom:12px;font-style:italic}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{
+  text-align:left;font-size:11px;color:var(--muted);
+  font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:10px 12px;border-bottom:1px solid var(--line);
+  background:rgba(241,238,233,.4);
+}
+td{padding:11px 12px;border-bottom:1px solid rgba(60,66,74,.05);vertical-align:top;color:var(--ink-soft)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(241,238,233,.3)}
+td:first-child{font-weight:700;color:var(--ink)}
+td a{
+  color:var(--steel-900);text-decoration:none;
+  border-bottom:1px dashed var(--steel-300);
+  font-weight:700;transition:.15s;
+}
+td a:hover{color:#000;border-bottom-color:var(--steel-900)}
+
+/* ===== 证据徽章（玻璃版） ===== */
+.badge{
+  display:inline-block;font-size:10.5px;font-weight:700;
+  padding:3px 9px;border-radius:999px;
+  vertical-align:1px;margin-left:5px;letter-spacing:.3px;
+  backdrop-filter:blur(4px);
+}
+.badge.pub{background:var(--pub-bg);color:var(--pub);border:1px solid rgba(47,125,92,.3)}
+.badge.infer{background:var(--infer-bg);color:var(--infer);border:1px solid rgba(192,131,65,.3)}
+.badge.sci{background:var(--sci-bg);color:var(--sci);border:1px solid rgba(194,85,74,.3)}
+
+/* ===== 动作讲解卡片（白色磨砂玻璃 + 橙色发光光柱） ===== */
+.action-card{
+  position:relative;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:14px;
+  padding:18px 22px;
+  margin-bottom:14px;
+  box-shadow:0 6px 20px rgba(60,66,74,.05),inset 0 1px 0 rgba(255,255,255,.9);
+  transition:.25s;
+  overflow:hidden;
+}
+/* 橙色光柱（与结论框同款，宽度稍细，贴合卡片圆角，无外溢辉光） */
+.action-card::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:8px;border-radius:14px;
+  background:
+    linear-gradient(180deg,
+      var(--warm-deep) 0%,
+      var(--warm) 45%,
+      rgba(245,160,95,.6) 75%,
+      rgba(245,160,95,.18) 100%);
+}
+.action-card:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(60,66,74,.08)}
+.action-card h3{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px;display:flex;align-items:center}
+.action-card .explain{font-size:14px;margin:10px 0;padding:10px 14px;border-left:3px solid var(--steel-300);background:rgba(241,238,233,.4);border-radius:0 8px 8px 0;color:var(--ink-soft);font-style:italic}
+.action-card .note{font-size:13px;color:var(--sci);margin-top:8px;font-weight:500}
+.action-card .source{font-size:12px;color:var(--muted);margin-top:8px;font-style:italic}
+
+/* ===== 饮食区（磨砂玻璃 + 暖色微光） ===== */
+.nutrition{
+  position:relative;overflow:hidden;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:16px;
+  padding:20px 22px;
+  box-shadow:0 8px 24px rgba(60,66,74,.06);
+}
+.nutrition::before{
+  content:"";position:absolute;top:-50%;right:-20%;width:50%;height:200%;
+  background:radial-gradient(circle, rgba(245,160,95,.15) 0%, transparent 60%);
+  pointer-events:none;
+}
+.nutrition ul{padding-left:20px;font-size:14px;color:var(--ink-soft);position:relative}
+.nutrition li{margin-bottom:8px}
+
+/* ===== 页脚 ===== */
+.footer{
+  margin-top:38px;padding:20px 22px;
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:14px;
+  font-size:12px;color:var(--muted);text-align:center;line-height:1.8;
+  box-shadow:0 4px 12px rgba(60,66,74,.04);
+}
+
+/* ===== 锚点偏移：点击导航跳转时给吸顶导航留出空间 ===== */
+[id]{scroll-margin-top:70px}
+
+/* ===== 打印：去掉背景装饰，纯白打印 ===== */
+@media print{
+  body{
+    background:#fff!important;
+    background-image:none!important;
+  }
+  .page-header,.day-block,.action-card,.nutrition,.footer,.anchor-nav{
+    background:#fff!important;backdrop-filter:none!important;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    border-color:#ddd!important;
+  }
+  .day-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .day-block,.action-card{break-inside:avoid}
+  .anchor-nav{display:none}
+  .day-block:hover,.action-card:hover{transform:none}
+  /* 打印时去掉光柱辉光，降级为细橙线（节省墨水） */
+  .verdict::before,.action-card::before{box-shadow:none;background:var(--warm-deep);width:3px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== 1. 页头区：替换 {{计划标题}}/{{适用人群}}/{{标签}} ========== -->
+<header class="page-header">
+  <div class="brand">
+    <div class="bolt">⚡</div>
+    <div class="name">NovaPerformance</div>
+  </div>
+  <div class="kicker">大海运动表现 · 公开训练框架重建</div>
+  <h1>{{计划标题}}</h1>
+  <p class="subtitle">{{适用人群与目标一句话}}</p>
+  <div class="meta">{{生成日期}} · 大海运动表现视角 · 基于公开资料重建</div>
+  <div class="tags">
+    <span>4 训练日</span><span>2 恢复日</span><span>1 休息日</span><span>{{球种/位置}}</span>
+  </div>
+</header>
+
+<!-- ========== 2. 导航按钮（吸顶）：按实际内容增减，链接到下方各 id ========== -->
+<nav class="anchor-nav">
+  <a href="#verdict">先看结论</a>
+  <a href="#day-1">周一</a>
+  <a href="#day-2">周二</a>
+  <a href="#day-3">周三</a>
+  <a href="#day-4">周四</a>
+  <a href="#day-5">周五</a>
+  <a href="#actions">动作讲解</a>
+  <a href="#diet">饮食建议</a>
+  <a href="#note">免责声明</a>
+</nav>
+
+<!-- ========== 3. 开场结论（大海式强指令）：一句结论 + 至多一句关键依据，不再展开 ========== -->
+<div class="verdict" id="verdict">
+  <strong>先看结论：{{结论一句话}}</strong><span class="verdict-brief">{{（可选）一句关键依据：位置/伤病/基础}}</span>
+</div>
+
+<!-- ========== 4. 训练日区块：每个训练日复制一个 .day-block，id 依次 day-1/day-2...
+       色块标题类名：周一/周四力量日=day-mon/day-thu，周二/周五速度日=day-tue/day-fri，
+       恢复日=day-wed/day-sat，休息日=day-sun。
+       表格中动作名用 <a href="#detail-NN"> 链接到下方讲解卡片，徽章标证据等级 ========== -->
+<div class="day-block" id="day-1">
+  <div class="day-header day-mon">周一 · 力量日一 ——「{{主题}}」</div>
+  <div class="day-body">
+    <p class="phase-note">训练前：{{准备活动说明}}</p>
+    <table>
+      <tr><th>动作</th><th>目标</th><th>组 × 次数</th><th>间歇</th></tr>
+      <tr><td><a href="#detail-01">杠铃深蹲</a> <span class="badge pub">公开观点</span></td><td>{{目标}}</td><td>4-5 × 1-5（中等偏重）</td><td>2-3 分钟</td></tr>
+      <tr><td><a href="#detail-02">动作二</a> <span class="badge infer">框架推断</span></td><td>{{目标}}</td><td>{{组次}}</td><td>{{间歇}}</td></tr>
+    </table>
+    <p class="phase-note">分阶段说明 / 替换提示：{{补充说明}}</p>
+  </div>
+</div>
+
+<!-- ========== 5. 动作讲解区：每个动作一个 .action-card，id 与表格链接一一对应 ========== -->
+<h2 class="section" id="actions">逐动作讲解 + 注意事项</h2>
+
+<div class="action-card" id="detail-01">
+  <h3>杠铃深蹲 <span class="badge pub">公开观点</span></h3>
+  <div class="explain">"{{大海原话讲解，引号+来源}}"</div>
+  <div class="note">{{注意事项/常见错误/伤病适配}}</div>
+  <div class="source">来源：{{视频逐字稿标题}}</div>
+</div>
+
+<div class="action-card" id="detail-02">
+  <h3>动作二 <span class="badge infer">框架推断</span></h3>
+  <div class="explain">{{讲解要点}}</div>
+  <div class="note">{{注意事项}}</div>
+  <div class="source">来源：{{说明}}</div>
+</div>
+
+<!-- ========== 6. 饮食建议区 ========== -->
+<h2 class="section" id="diet">饮食建议</h2>
+<div class="nutrition">
+  <ul>
+    <li>{{饮食建议 1（有原话引用标徽章）}}</li>
+    <li>{{饮食建议 2}}</li>
+  </ul>
+</div>
+
+<!-- ========== 7. 页脚免责 ========== -->
+<footer class="footer" id="note">
+  ⚠️ 本计划为基于「大海运动表现」公开资料重建的示例方案，非医学处方。<br>
+  出现急性疼痛、明显肿胀或关节不稳时请先就医评估。 · 大海运动表现视角 · 2026
+</footer>
+
+</div>
+</body>
+</html>
